@@ -176,17 +176,19 @@
     .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
+    /* UPDATED: Larger education logos */
     .institute-logo {
-      width: 44px; height: 44px; border-radius: 8px; background: #fff7cc; display: inline-flex; align-items: center; justify-content: center;
-      margin-right: 12px; font-size: 1rem; color: var(--primary-dark); vertical-align: middle; box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      overflow: hidden; cursor: pointer; position: relative;
+      width: 60px; height: 60px; border-radius: 12px; background: #fff7cc; display: inline-flex; align-items: center; justify-content: center;
+      margin-right: 15px; font-size: 1.2rem; color: var(--primary-dark); vertical-align: middle; box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      overflow: hidden; cursor: pointer; position: relative; flex-shrink: 0;
     }
     .institute-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .institute-logo input[type="file"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; }
 
+    /* UPDATED: Larger specialization/award thumbnails */
     .thumb {
-      width: 36px; height: 36px; border-radius: 8px; background: #fff7cc; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px;
-      font-size: 0.95rem; color: var(--primary-dark); box-shadow: 0 2px 6px rgba(0,0,0,0.06); overflow: hidden; cursor: pointer; position: relative;
+      width: 48px; height: 48px; border-radius: 10px; background: #fff7cc; display: inline-flex; align-items: center; justify-content: center; margin-right: 12px;
+      font-size: 1.1rem; color: var(--primary-dark); box-shadow: 0 3px 8px rgba(0,0,0,0.08); overflow: hidden; cursor: pointer; position: relative; flex-shrink: 0;
     }
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .thumb input[type="file"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; }
@@ -225,6 +227,10 @@
       .hero-text h2 { font-size: 1.5rem; }
       .section-title h2 { font-size: 2rem; }
       .profile-img { width: 280px; height: 280px; }
+      
+      /* Mobile adjustments for larger logos */
+      .institute-logo { width: 50px; height: 50px; margin-right: 12px; }
+      .thumb { width: 40px; height: 40px; margin-right: 10px; }
     }
   </style>
 </head>
@@ -302,11 +308,11 @@
                 <div style="display: flex; align-items: center; margin-bottom: 8px;">
                   <div class="institute-logo" title="University of Toronto">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'edu-logo-1')" />
-                    <img src="assets/UofT_logo.png" alt="University of Toronto Logo" />
+                    <img id="edu-logo-1" src="assets/UofT_logo.png" alt="University of Toronto Logo" />
                   </div>
                   <strong>Postdoctoral Research Fellowship</strong>
                 </div>
-                <p style="margin-left: 52px; color: #64748b;">
+                <p style="margin-left: 75px; color: #64748b;">
                   Centre for Addiction and Mental Health (University of Toronto)<br />
                   Digital Health - AI in Healthcare (Mood Disorders)<br />
                   <span class="date">Dec 2022 - Sep 2024</span>
@@ -320,7 +326,7 @@
                   </div>
                   <strong>Ph.D. in Biomedical Engineering</strong>
                 </div>
-                <p style="margin-left: 52px; color: #64748b;">
+                <p style="margin-left: 75px; color: #64748b;">
                   Université de Lyon - Signal and Image Processing<br />
                   <span class="date">Oct 2014 - Oct 2018</span>
                 </p>
@@ -333,7 +339,7 @@
                   </div>
                   <strong>Bachelor's & Master's in Biomedical Engineering</strong>
                 </div>
-                <p style="margin-left: 52px; color: #64748b;">
+                <p style="margin-left: 75px; color: #64748b;">
                   Hariri Canadian University - Signal Processing<br />
                   Award: Graduate Research Award<br />
                   <span class="date">Aug 2008 - Jun 2013</span>
@@ -344,79 +350,79 @@
             <div>
               <h4 style="margin-bottom: 15px; color: var(--primary);">Specializations</h4>
               <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Johns Hopkins University">
+                <li style="margin-bottom: 12px; display: flex; align-items: center;">
+                  <div class="thumb" title="Johns Hopkins University">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-1')" />
-                    <img id="spec-logo-1" src="https://placehold.co/36x36" alt="JHU Logo" />
+                    <img id="spec-logo-1" src="https://placehold.co/48x48" alt="JHU Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Johns Hopkins University (2025) — Artificial Intelligence in Healthcare</span>
+                  <span>Johns Hopkins University (2025) — Artificial Intelligence in Healthcare</span>
                 </li>
-                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Stanford University">
+                <li style="margin-bottom: 12px; display: flex; align-items: center;">
+                  <div class="thumb" title="Stanford University">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-2')" />
-                    <img id="spec-logo-2" src="https://placehold.co/36x36" alt="Stanford Logo" />
+                    <img id="spec-logo-2" src="https://placehold.co/48x48" alt="Stanford Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Stanford University (2024) — Artificial Intelligence in Healthcare</span>
+                  <span>Stanford University (2024) — Artificial Intelligence in Healthcare</span>
                 </li>
-                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Amazon Web Services">
+                <li style="margin-bottom: 12px; display: flex; align-items: center;">
+                  <div class="thumb" title="Amazon Web Services">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-3')" />
-                    <img id="spec-logo-3" src="https://placehold.co/36x36" alt="AWS Logo" />
+                    <img id="spec-logo-3" src="https://placehold.co/48x48" alt="AWS Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Amazon Web Services (2023) — Machine Learning Engineer</span>
+                  <span>Amazon Web Services (2023) — Machine Learning Engineer</span>
                 </li>
-                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="DeepLearning.AI">
+                <li style="margin-bottom: 12px; display: flex; align-items: center;">
+                  <div class="thumb" title="DeepLearning.AI">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-4')" />
-                    <img id="spec-logo-4" src="https://placehold.co/36x36" alt="DeepLearning.AI Logo" />
+                    <img id="spec-logo-4" src="https://placehold.co/48x48" alt="DeepLearning.AI Logo" />
                   </div>
-                  <span style="margin-left: 40px;">DeepLearning.AI (2021–2022) — TensorFlow Developer, Deep Learning, MLOps</span>
+                  <span>DeepLearning.AI (2021–2022) — TensorFlow Developer, Deep Learning, MLOps</span>
                 </li>
               </ul>
 
               <h4 style="margin: 25px 0 15px; color: var(--primary);">Awards & Recognition</h4>
               <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                  <div class="thumb">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-1')" />
-                    <img id="award-logo-1" src="https://placehold.co/36x36" alt="Award Logo" />
+                    <img id="award-logo-1" src="https://placehold.co/48x48" alt="Award Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Best Research Presentation Award (University of Toronto, 2024)</span>
+                  <span>Best Research Presentation Award (University of Toronto, 2024)</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                  <div class="thumb">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-2')" />
-                    <img id="award-logo-2" src="https://placehold.co/36x36" alt="Award Logo" />
+                    <img id="award-logo-2" src="https://placehold.co/48x48" alt="Award Logo" />
                   </div>
-                  <span style="margin-left: 40px;">AWS Machine Learning Engineer Scholarship (AWS, 2022)</span>
+                  <span>AWS Machine Learning Engineer Scholarship (AWS, 2022)</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                  <div class="thumb">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-3')" />
-                    <img id="award-logo-3" src="https://placehold.co/36x36" alt="Award Logo" />
+                    <img id="award-logo-3" src="https://placehold.co/48x48" alt="Award Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Graduate Research Award, Rafik Hariri University (2013)</span>
+                  <span>Graduate Research Award, Rafik Hariri University (2013)</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                  <div class="thumb">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-4')" />
-                    <img id="award-logo-4" src="https://placehold.co/36x36" alt="Award Logo" />
+                    <img id="award-logo-4" src="https://placehold.co/48x48" alt="Award Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Full Travel & Accommodation Grant, IEEE 1st International Summer School on Neural Engineering, Jiao Tong University, Shanghai, China (2013)</span>
+                  <span>Full Travel & Accommodation Grant, IEEE 1st International Summer School on Neural Engineering, Jiao Tong University, Shanghai, China (2013)</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: center;">
+                  <div class="thumb">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-5')" />
-                    <img id="award-logo-5" src="https://placehold.co/36x36" alt="Award Logo" />
+                    <img id="award-logo-5" src="https://placehold.co/48x48" alt="Award Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Full Travel & Accommodation Grant, 9th IEEE-EMBS International Summer School on Biomedical Signal Processing, Borromeo College, Pavia, Italy (Aug 30 – Sep 6, 2015)</span>
+                  <span>Full Travel & Accommodation Grant, 9th IEEE-EMBS International Summer School on Biomedical Signal Processing, Borromeo College, Pavia, Italy (Aug 30 – Sep 6, 2015)</span>
                 </li>
-                <li style="padding-left: 30px; position: relative;">
-                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                <li style="display: flex; align-items: center;">
+                  <div class="thumb">
                     <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-6')" />
-                    <img id="award-logo-6" src="https://placehold.co/36x36" alt="Award Logo" />
+                    <img id="award-logo-6" src="https://placehold.co/48x48" alt="Award Logo" />
                   </div>
-                  <span style="margin-left: 40px;">Startup Innovation Grant by Kafalat (Beirut, Lebanon) — Wrist-worn non-invasive glucometer</span>
+                  <span>Startup Innovation Grant by Kafalat (Beirut, Lebanon) — Wrist-worn non-invasive glucometer</span>
                 </li>
               </ul>
             </div>
