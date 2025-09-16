@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ramzi Halabi — AI Healthcare Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #6d28d9; /* purple */
+      --primary-dark: #5b21b6;
+      --secondary: #facc15; /* yellow */
+      --secondary-dark: #b7791f;
+      --dark: #111827;
+      --darker: #0f172a;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+      overflow-x: hidden;
+    }
+
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 100px 0; position: relative; z-index: 2; }
+
+    .section-title { text-align: center; margin-bottom: 70px; position: relative; }
+    .section-title h2 { font-size: 2.8rem; color: var(--dark); margin-bottom: 15px; font-weight: 700; }
+    .section-title p { color: var(--gray); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+      position: fixed; width: 100%; top: 0; z-index: 1000;
+    }
+
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+
+    .logo {
+      font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center;
+    }
+    .logo i { margin-right: 10px; color: var(--secondary); }
+
+    .nav-links { display: flex; list-style: none; }
+    .nav-links li { margin-left: 30px; }
+    .nav-links a {
+      text-decoration: none; color: var(--dark); font-weight: 500; transition: var(--transition); position: relative; padding: 5px 0;
+    }
+    .nav-links a:after {
+      content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--primary); transition: var(--transition);
+    }
+    .nav-links a:hover:after { width: 100%; }
+    .nav-links a:hover { color: var(--primary); }
+    .menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; }
+
+    #hero {
+      height: 100vh; display: flex; align-items: center; padding-top: 80px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #6d28d9 0%, #facc15 100%); color: white;
+    }
+    .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%); z-index: 1; }
+    .hero-content {
+      display: flex; align-items: center; justify-content: space-between; gap: 50px; position: relative; z-index: 2;
+      width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    }
+    .hero-text { flex: 1; animation: fadeInUp 1s ease; }
+    .hero-text h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; font-weight: 800; }
+    .hero-text h2 { font-size: 1.8rem; color: var(--secondary); margin-bottom: 25px; font-weight: 600; }
+    .hero-text p { font-size: 1.3rem; margin-bottom: 30px; max-width: 600px; line-height: 1.5; }
+
+    .btn {
+      display: inline-block; padding: 14px 32px; background: var(--secondary); color: var(--dark); border-radius: 50px;
+      text-decoration: none; font-weight: 600; transition: var(--transition); border: 2px solid var(--secondary); box-shadow: var(--shadow); margin-right: 15px;
+    }
+    .btn:hover { background: transparent; color: var(--secondary); transform: translateY(-3px); }
+    .btn-outline { background: transparent; color: var(--secondary); border: 2px solid var(--secondary); }
+    .btn-outline:hover { background: var(--secondary); color: var(--dark); }
+
+    .hero-image { flex: 1; text-align: center; animation: fadeIn 1s ease 0.3s both; position: relative; }
+    .profile-container {
+      position: relative; display: inline-block; width: 360px; height: 360px; border-radius: 50%; overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); border: 6px solid var(--secondary); transition: var(--transition);
+    }
+    .profile-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; transition: var(--transition); filter: drop-shadow(0 0 8px rgba(0,0,0,0.12)); }
+    .profile-container:hover .profile-img { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(0,0,0,0.15)); }
+
+    .ai-icons { display: flex; gap: 25px; margin-bottom: 30px; justify-content: center; animation: floatUpDown 4s ease-in-out infinite; }
+    .ai-icon { font-size: 3.5rem; color: var(--secondary); filter: drop-shadow(0 0 5px rgba(250, 204, 21, 0.9)); transition: transform 0.3s ease; }
+    .ai-icon:hover { transform: scale(1.2) rotate(15deg); color: var(--primary); filter: drop-shadow(0 0 18px rgba(109, 40, 217, 0.9)); }
+
+    #services { background: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .service-card {
+      background: white; border-radius: 15px; padding: 40px 30px; box-shadow: var(--shadow); transition: var(--transition); text-align: center; position: relative; overflow: hidden; z-index: 1;
+    }
+    .service-card:before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 0; background: linear-gradient(135deg, var(--primary), var(--secondary)); transition: var(--transition); z-index: -1; opacity: 0.1;
+    }
+    .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1); }
+    .service-card:hover:before { height: 100%; }
+    .service-icon { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; transition: var(--transition); }
+    .service-card:hover .service-icon { color: white; transform: scale(1.1); }
+    .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; transition: var(--transition); }
+    .service-card:hover h3 { color: white; }
+    .service-card p { transition: var(--transition); }
+    .service-card:hover p { color: rgba(255, 255, 255, 0.9); }
+
+    .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+    .timeline::after {
+      content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, var(--primary), var(--secondary)); top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
+    }
+    .timeline-item { padding: 20px 40px; position: relative; width: 50%; box-sizing: border-box; margin-bottom: 50px; }
+    .timeline-item:nth-child(odd) { left: 0; }
+    .timeline-item:nth-child(even) { left: 50%; }
+    .timeline-content {
+      padding: 30px; background: white; border-radius: 15px; box-shadow: var(--shadow); transition: var(--transition); position: relative;
+    }
+    .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+    .timeline-item:nth-child(odd)::after,
+    .timeline-item:nth-child(even)::after {
+      content: ''; position: absolute; width: 20px; height: 20px; background: var(--primary); top: 40px; border-radius: 50%; border: 4px solid white; box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-item:nth-child(odd)::after { right: -10px; }
+    .timeline-item:nth-child(even)::after { left: -10px; }
+
+    .timeline-content h3 { margin-bottom: 10px; color: var(--primary); }
+    .timeline-content h4 { margin-bottom: 15px; color: #475569; font-weight: 600; }
+    .timeline-content .date {
+      display: inline-block; background: rgba(13, 148, 136, 0.1); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 15px;
+    }
+
+    .publication-item {
+      background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .publication-item:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+    .publication-item h3 { margin-bottom: 10px; font-size: 1.2rem; }
+    .publication-item p { color: #6b7280; margin-bottom: 15px; }
+    .publication-link { display: inline-flex; align-items: center; color: var(--primary); text-decoration: none; font-weight: 600; }
+    .publication-link i { margin-left: 5px; transition: var(--transition); }
+    .publication-link:hover i { transform: translateX(3px); }
+
+    #contact { background: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%); }
+    .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
+    .contact-info h3 { font-size: 1.8rem; margin-bottom: 20px; }
+    .contact-detail { display: flex; align-items: flex-start; margin-bottom: 25px; }
+    .contact-icon { font-size: 1.5rem; color: var(--primary); margin-right: 15px; min-width: 30px; }
+    .contact-text h4 { margin-bottom: 5px; }
+    .social-links { display: flex; margin-top: 30px; }
+    .social-links a {
+      display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; margin-right: 15px; text-decoration: none; transition: var(--transition);
+    }
+    .social-links a:hover { transform: translateY(-5px) rotate(5deg); background: var(--secondary); }
+    .contact-form .form-group { margin-bottom: 20px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 15px; border: 1px solid #d1d5db; border-radius: 10px; font-family: inherit; font-size: 1rem; transition: var(--transition);
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2); }
+    .contact-form textarea { height: 150px; resize: vertical; }
+
+    footer { background: var(--darker); color: white; text-align: center; padding: 40px 0; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+    .institute-logo {
+      width: 44px; height: 44px; border-radius: 8px; background: #fff7cc; display: inline-flex; align-items: center; justify-content: center;
+      margin-right: 12px; font-size: 1rem; color: var(--primary-dark); vertical-align: middle; box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      overflow: hidden; cursor: pointer; position: relative;
+    }
+    .institute-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .institute-logo input[type="file"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; }
+
+    .thumb {
+      width: 36px; height: 36px; border-radius: 8px; background: #fff7cc; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px;
+      font-size: 0.95rem; color: var(--primary-dark); box-shadow: 0 2px 6px rgba(0,0,0,0.06); overflow: hidden; cursor: pointer; position: relative;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb input[type="file"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; }
+
+    #portfolio { background: white; padding-bottom: 120px; }
+    .portfolio-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .portfolio-section { margin-bottom: 80px; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    .portfolio-card {
+      background: var(--light); border-radius: 15px; box-shadow: var(--shadow); padding: 25px; transition: var(--transition); cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .portfolio-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); transform: translateY(-5px); }
+    .portfolio-card img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .portfolio-card h4 { font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-dark); }
+    .portfolio-card p { color: var(--gray); flex-grow: 1; margin-bottom: 15px; }
+    .portfolio-card a { color: var(--secondary); font-weight: 600; text-decoration: none; transition: var(--transition); align-self: flex-start; }
+    .portfolio-card a:hover { text-decoration: underline; }
+
+    @media (max-width: 992px) {
+      .hero-content { flex-direction: column; text-align: center; }
+      .profile-container { margin: 0 auto 40px; }
+      .timeline::after { left: 31px; }
+      .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+      .timeline-item:nth-child(even) { left: 0; }
+      .timeline-item:nth-child(odd)::after, .timeline-item:nth-child(even)::after { left: 21px; }
+    }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: white; flex-direction: column; align-items: center; padding-top: 50px; transition: var(--transition);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .nav-links.active { left: 0; }
+      .nav-links li { margin: 15px 0; }
+      .hero-text h1 { font-size: 2.5rem; }
+      .hero-text h2 { font-size: 1.5rem; }
+      .section-title h2 { font-size: 2rem; }
+      .profile-img { width: 280px; height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#hero" class="logo">
+          <i class="fas fa-brain"></i>
+          Ramzi Halabi
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="ai-icons" aria-label="AI in healthcare icons">
+            <i class="fas fa-robot ai-icon" title="AI"></i>
+            <i class="fas fa-brain ai-icon" title="Brain"></i>
+            <i class="fas fa-heartbeat ai-icon" title="Health"></i>
+            <i class="fas fa-microscope ai-icon" title="Research"></i>
+            <i class="fas fa-dna ai-icon" title="Genetics"></i>
+          </div>
+          <h1>Ramzi Halabi</h1>
+          <h2>Biomedical Engineer & AI Healthcare Specialist</h2>
+          <p>Transforming healthcare through innovative AI solutions, advanced signal processing, and digital health technologies. Bridging the gap between academic research and real-world clinical applications.</p>
+          <div class="hero-btns">
+            <a href="#contact" class="btn">Collaborate</a>
+            <a href="#publications" class="btn btn-outline">View Research</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="profile-container">
+            <img src="https://placehold.co/400x400" alt="Ramzi Halabi" class="profile-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2>About Me</h2>
+        <p>Bridging biomedical engineering with AI for transformative healthcare solutions</p>
+      </div>
+      <div class="animate-on-scroll">
+        <div style="background: white; border-radius: 15px; padding: 40px; box-shadow: var(--shadow);">
+          <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary);">Professional Summary</h3>
+          <p style="margin-bottom: 20px;">
+            Experienced biomedical engineer, digital health research scientist, consultant, and educator with over a decade of success developing and deploying innovative algorithms for the analysis and deployment of complex, real-world biomedical and behavioral signals collected using medical devices, wearable technology, and smartphones. Led the end-to-end design of scalable ML systems and advanced signal processing methods for passively collected, multivariate, multimodal medical data. Filed patents on time-frequency algorithms enabling early detection and classification in longitudinal health monitoring. Consulted for leading academic and healthcare institutions, translating cutting-edge research into practical solutions. Published research articles in top conferences and journals, and consistently contributed to high-impact cross-disciplinary clinical research projects at the interface of signal processing, AI, and mental health.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 30px;">
+            <div>
+              <h4 style="margin-bottom: 15px; color: var(--primary);">Education</h4>
+              <div style="margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                  <div class="institute-logo" title="University of Toronto">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'edu-logo-1')" />
+                    <img id="edu-logo-1" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/University_of_Toronto_coat_of_arms.svg/1200px-University_of_Toronto_coat_of_arms.svg.png" alt="University of Toronto Logo" />
+                  </div>
+                  <strong>Postdoctoral Research Fellowship</strong>
+                </div>
+                <p style="margin-left: 52px; color: #64748b;">
+                  Centre for Addiction and Mental Health (University of Toronto)<br />
+                  Digital Health - AI in Healthcare (Mood Disorders)<br />
+                  <span class="date">Dec 2022 - Sep 2024</span>
+                </p>
+              </div>
+              <div style="margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                  <div class="institute-logo" title="Université de Lyon">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'edu-logo-2')" />
+                    <img id="edu-logo-2" src="https://upload.wikimedia.org/wikipedia/en/7/7a/Université_de_Lyon_logo.png" alt="Université de Lyon Logo" />
+                  </div>
+                  <strong>Ph.D. in Biomedical Engineering</strong>
+                </div>
+                <p style="margin-left: 52px; color: #64748b;">
+                  Université de Lyon - Signal and Image Processing<br />
+                  <span class="date">Oct 2014 - Oct 2018</span>
+                </p>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                  <div class="institute-logo" title="Hariri Canadian University">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'edu-logo-3')" />
+                    <img id="edu-logo-3" src="https://hcu.edu.lb/wp-content/uploads/2020/06/hcu-logo.png" alt="Hariri Canadian University Logo" />
+                  </div>
+                  <strong>Bachelor's & Master's in Biomedical Engineering</strong>
+                </div>
+                <p style="margin-left: 52px; color: #64748b;">
+                  Hariri Canadian University - Signal Processing<br />
+                  Award: Graduate Research Award<br />
+                  <span class="date">Aug 2008 - Jun 2013</span>
+                </p>
+              </div>
+            </div>
+            <div>
+              <h4 style="margin-bottom: 15px; color: var(--primary);">Key Specializations</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Digital Health & AI">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-1')" />
+                    <img id="spec-logo-1" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Artificial_Intelligence_Logo.svg" alt="Digital Health & AI Logo" />
+                  </div>
+                  <span style="margin-left: 40px;">Digital Health & AI in Healthcare</span>
+                </li>
+                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Advanced Signal Processing">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-2')" />
+                    <img id="spec-logo-2" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Sine_wave.svg" alt="Signal Wave Icon" />
+                  </div>
+                  <span style="margin-left: 40px;">Advanced Signal Processing (Time-frequency analysis)</span>
+                </li>
+                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Machine Learning">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-3')" />
+                    <img id="spec-logo-3" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Machine_learning_icon.svg" alt="Machine Learning Icon" />
+                  </div>
+                  <span style="margin-left: 40px;">Machine Learning for Biomedical Time Series</span>
+                </li>
+                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="Wearable Sensor Data">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-4')" />
+                    <img id="spec-logo-4" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Smartwatch_icon.svg" alt="Wearable Icon" />
+                  </div>
+                  <span style="margin-left: 40px;">Wearable Sensor Data Analysis</span>
+                </li>
+                <li style="margin-bottom: 12px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;" title="MLOps & Scalable Systems">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'spec-logo-5')" />
+                    <img id="spec-logo-5" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cloud_computing_icon.svg" alt="Cloud/DevOps Icon" />
+                  </div>
+                  <span style="margin-left: 40px;">MLOps & Scalable ML Systems</span>
+                </li>
+              </ul>
+              <h4 style="margin: 25px 0 15px; color: var(--primary);">Awards & Recognition</h4>
+              <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-1')" />
+                    <img id="award-logo-1" src="https://placehold.co/36x36" alt="Award Logo" />
+                  </div>
+                  <span style="margin-left: 40px;">Best Research Presentation Award (University of Toronto, 2024)</span>
+                </li>
+                <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-2')" />
+                    <img id="award-logo-2" src="https://placehold.co/36x36" alt="Award Logo" />
+                  </div>
+                  <span style="margin-left: 40px;">AWS Machine Learning Engineer Scholarship (2022)</span>
+                </li>
+                <li style="padding-left: 30px; position: relative;">
+                  <div class="thumb" style="position: absolute; left: 0; top: 0;">
+                    <input type="file" accept="image/*" onchange="loadImage(event, 'award-logo-3')" />
+                    <img id="award-logo-3" src="https://placehold.co/36x36" alt="Award Logo" />
+                  </div>
+                  <span style="margin-left: 40px;">Graduate Research Award, Rafik Hariri University (2013)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2>My Services</h2>
+        <p>Transforming healthcare through AI, signal processing, and digital health innovation</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card animate-on-scroll">
+          <div class="service-icon"><i class="fas fa-microscope"></i></div>
+          <h3>Research Consulting</h3>
+          <p>Strategic research design, methodology development, and data analysis to solve complex healthcare challenges using AI and advanced signal processing.</p>
+        </div>
+        <div class="service-card animate-on-scroll">
+          <div class="service-icon"><i class="fas fa-brain"></i></div>
+          <h3>AI in Healthcare</h3>
+          <p>Development of machine learning models for medical data, including time series analysis, predictive modeling, and clinical decision support systems.</p>
+        </div>
+        <div class="service-card animate-on-scroll">
+          <div class="service-icon"><i class="fas fa-heartbeat"></i></div>
+          <h3>Digital Health Solutions</h3>
+          <p>End-to-end development of digital health platforms, wearable data pipelines, and real-time biomarker computation systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container portfolio-container">
+      <div class="section-title animate-on-scroll">
+        <h2>Portfolio</h2>
+        <p>Showcasing my academic teaching and consulting projects</p>
+      </div>
+
+      <div class="portfolio-section animate-on-scroll">
+        <h3 style="color: var(--primary); margin-bottom: 30px;">Academic Teaching Portfolio</h3>
+        <div class="portfolio-grid">
+          <div class="portfolio-card">
+            <img src="https://placehold.co/600x400?text=AI+in+Medicine+Course" alt="AI in Medicine Course" />
+            <h4>AI in Medicine Course Development</h4>
+            <p>Developed lectures, labs, and interactive content for AI in Medicine at American University of Beirut.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+          <div class="portfolio-card">
+            <img src="https://placehold.co/600x400?text=Biomedical+Engineering+Workshops" alt="Biomedical Engineering Workshops" />
+            <h4>Biomedical Engineering Workshops</h4>
+            <p>Conducted workshops on AI, signal processing, and biomedical device design for university students.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+          <div class="portfolio-card">
+            <img src="https://placehold.co/600x400?text=Computational+Neuroscience+Instruction" alt="Computational Neuroscience Instruction" />
+            <h4>Computational Neuroscience Instruction</h4>
+            <p>Instructor for Probability and Statistics in Computational Neuroscience (Matlab & Python).</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio-section animate-on-scroll">
+        <h3 style="color: var(--primary); margin-bottom: 30px;">Consulting Project Portfolio</h3>
+        <div class="portfolio-grid">
+          <div class="portfolio-card">
+            <img src="https://placehold.co/600x400?text=Digital+Mental+Health+Studies" alt="Digital Mental Health Studies" />
+            <h4>Digital Mental Health Studies</h4>
+            <p>Conceptualized and led digital mental health research projects with real-time data pipelines and dashboards.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+          <div class="portfolio-card">
+            <img src="https://placehold.co/600x400?text=Wearable+Data+Analytics" alt="Wearable Data Analytics" />
+            <h4>Wearable Data Analytics</h4>
+            <p>Developed advanced signal processing and ML algorithms for wearable sensor data analysis.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+          <div class="portfolio-card">
+            <img src="https://placehold.co/600x400?text=Glucometer+Prototype" alt="Glucometer Prototype" />
+            <h4>Non-invasive Glucometer Prototype</h4>
+            <p>Led design and validation of a novel wrist-worn glucometer using RF electronics and federated machine learning.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2>Experience & Education</h2>
+        <p>A journey through academic excellence and industry innovation</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>Biomedical Engineering Lead</h3>
+            <h4>Advanced Mood Systems (b.r.a.i.n) - Independent Consultant</h4>
+            <div class="date">April 2025 - Present, Toronto, Canada</div>
+            <p>Conceptualizing digital mental health studies, developing end-to-end digital health data pipelines, and creating real-time multimodal dashboards for data quality and advanced analytics.</p>
+          </div>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>AI in Medicine - Academic Consultant</h3>
+            <h4>Scholars in HeAlth Research Program (SHARP) - American University of Beirut</h4>
+            <div class="date">May 2025, Beirut, Lebanon</div>
+            <p>Developing educational content for the AI in Medicine course, including lectures, interactive presentations, practical labs, and reading material.</p>
+          </div>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>Digital Health & AI in Psychiatry - Independent Consultant</h3>
+            <h4>B.R.A.I.N Lab, CAMH - Department of General Adult Psychiatry and Health Systems</h4>
+            <div class="date">September 2024 - Present, Toronto, Canada</div>
+            <p>Co-leading digital mental health and AI healthcare research projects, developing innovative DSP and ML algorithms, and co-supervising graduate student research projects.</p>
+          </div>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>Postdoctoral Fellow</h3>
+            <h4>Centre for Addiction and Mental Health (affiliated with University of Toronto)</h4>
+            <div class="date">September 2022 - September 2024, Toronto, Canada</div>
+            <p>Co-leading digital mental health projects, co-supervising graduate students, presenting research at national/international venues, and participating in grant writing.</p>
+          </div>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>Postdoctoral Fellow</h3>
+            <h4>Krembil Centre for Neuroinformatics (KCNI) at CAMH</h4>
+            <div class="date">December 2021 - August 2022, Toronto, Canada</div>
+            <p>Co-leading digital health projects for smartphone and wearable data quality assessment, initiating MLOps and WearOps infrastructure.</p>
+          </div>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>Co-founder and Chief Technology Officer</h3>
+            <h4>Weglo</h4>
+            <div class="date">October 2018 - August 2021, Beirut, Lebanon</div>
+            <p>Leading the design, testing, and validation of a novel wrist-worn non-invasive glucometer using RF electronics and federated machine learning.</p>
+          </div>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-content">
+            <h3>Lecturer</h3>
+            <h4>Rafik Hariri University</h4>
+            <div class="date">October 2018 - December 2021, Mechref, Lebanon</div>
+            <p>Developing and teaching courses in AI in Healthcare, Biomedical Engineering, and Signal Processing, along with various workshops and lab courses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2>Selected Publications</h2>
+        <p>Contributions to advancing healthcare through research and innovation</p>
+      </div>
+      <div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Ramzi Halabi, Mirkamal Tolend, Christina Gonzalez-Torres et al. Sleep architecture mapping throughout different polarities in bipolar disorder using wearable technology. Nat Molecular Psychiatry (2025, submitted)</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://www.nature.com/nm/" target="_blank" class="publication-link">View Journal <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Ramzi Halabi, Benoit H. Mulsant, Mirkamal Tolend et al. A systematic exploration of digital biomarkers for the detection of depressive episodes in bipolar disorder, Nature npj Mental Health Research (submitted).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://www.nature.com/npjamd/" target="_blank" class="publication-link">View Journal <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Mirkamal Tolend, Katie Scott, Dane Mauer-Vakil, Ramzi Halabi et al. Apps and Gaps in Bipolar Disorder Revisited: Protocol for Systematic Review of E-Monitoring Approaches for Detection and Prediction of Episodes. 27th Annual Conference of the International Society for Bipolar Disorders (2025, accepted).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://www.bipolar-disorders.com/" target="_blank" class="publication-link">View Conference <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Ramzi Halabi, Mirkamal Tolend, Martin Alda et al. Age- and polarity-related changes in REM and NREM sleep architecture in bipolar disorder using densely sampled wearable data. 27th Annual Conference of the International Society for Bipolar Disorders (2025, accepted).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://www.bipolar-disorders.com/" target="_blank" class="publication-link">View Conference <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Abigail Ortiz, Ramzi Halabi, Martin Alda et al. Trajectories of suicidal risk impact mood regulation differently in patients with a diagnosis of bipolar disorder. 27th Annual Conference of the International Society for Bipolar Disorders (2025, accepted)</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://www.bipolar-disorders.com/" target="_blank" class="publication-link">View Conference <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Mirkamal Tolend, Ramzi Halabi and Abigail Ortiz. Time Series Forecasting of (Hypo)Manic Episodes Using Electronic Monitoring – Feasibility of a Personalized Deep Learning Model Workflow. Biological Psychiatry 97;9:S131 (2025).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://doi.org/10.1016/j.biopsych.2025.02.326" target="_blank" class="publication-link">View Publication <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Abigail Ortiz, Ramzi Halabi*, Mirkamal Tolend et al. Selection and Characterization of Digital Biomarkers of Depressive Episodes in Bipolar Disorder Using Explainable Machine Learning. Biological Psychiatry 97;9:S80 (2025).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://doi.org/10.1016/j.biopsych.2025.02.205" target="_blank" class="publication-link">View Publication <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Abigail Oritz, Ramzi Halabi*, Alda, M. et al. Day-to-day variability in activity levels detects transitions to depressive symptoms in bipolar disorder earlier than changes in sleep and mood. Int J Bipolar Disord 13, 13 (2025).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://doi.org/10.1186/s40345-025-00379-6" target="_blank" class="publication-link">View Publication <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Abigail Ortiz, Ramzi Halabi*, Martin Alda et al. Day-to-day variability in sleep and activity predict the onset of a hypomanic episode in patients with bipolar disorder, Journal of Affective Disorders (2025).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://doi.org/10.1016/j.jad.2025.01.026" target="_blank" class="publication-link">View Publication <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="publication-item animate-on-scroll">
+          <h3>Ramzi Halabi, Khairatun Yusuff, Clara Park et al. Mood regulation in euthymic patients with a history of antidepressant-induced mania. Bipolar Disorders (2024).</h3>
+          <p>Major contribution to conceptualization, design, implementation, and writing.</p>
+          <a href="https://doi.org/10.1111/bdi.13504" target="_blank" class="publication-link">View Publication <i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2>Contact Me</h2>
+        <p>Let's collaborate to advance healthcare through innovation</p>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info animate-on-scroll">
+          <h3>Get In Touch</h3>
+          <p>Interested in collaborating on research, consulting projects, or discussing opportunities in AI healthcare? Feel free to reach out!</p>
+
+          <div class="contact-detail">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-text">
+              <h4>Email</h4>
+              <p>ramzi.o.halabi@gmail.com</p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-text">
+              <h4>Location</h4>
+              <p>Toronto, Ontario, Canada</p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-text">
+              <h4>Phone</h4>
+              <p>+1 (647) 860-4308</p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-google-scholar"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-researchgate"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-orcid"></i></a>
+          </div>
+        </div>
+
+        <div class="contact-form animate-on-scroll">
+          <form id="contactForm">
+            <div class="form-group"><input type="text" placeholder="Your Name" required /></div>
+            <div class="form-group"><input type="email" placeholder="Your Email" required /></div>
+            <div class="form-group"><input type="text" placeholder="Subject" /></div>
+            <div class="form-group"><textarea placeholder="Your Message" required></textarea></div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Ramzi Halabi. Advancing Healthcare Through AI and Innovation.</p>
+      <p>Designed for academic and professional excellence in digital health</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    document.querySelectorAll('.nav-links a').forEach((link) => {
+      link.addEventListener('click', () => { navLinks.classList.remove('active'); });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+        }
+      });
+    });
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+    }
+
+    function animateOnScroll() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach((element) => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        if (elementPosition < screenPosition) { element.classList.add('visible'); }
+      });
+    }
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    function loadImage(event, imgId) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById(imgId);
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+</body>
+</html>
