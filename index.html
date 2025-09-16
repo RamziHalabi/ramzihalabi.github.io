@@ -149,32 +149,124 @@
     .publication-link i { margin-left: 5px; transition: var(--transition); }
     .publication-link:hover i { transform: translateX(3px); }
 
-    #contact { background: linear-gradient(135deg, rgba(13, 148, 136, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%); }
-    .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; }
-    .contact-info h3 { font-size: 1.8rem; margin-bottom: 20px; }
-    .contact-detail { display: flex; align-items: flex-start; margin-bottom: 25px; }
-    .contact-icon { font-size: 1.5rem; color: var(--primary); margin-right: 15px; min-width: 30px; }
-    .contact-text h4 { margin-bottom: 5px; }
-    .social-links { display: flex; margin-top: 30px; }
+    /* Updated Contact Section Styling */
+    #contact { 
+      background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(250, 204, 21, 0.05) 100%);
+      padding: 80px 0;
+    }
+    
+    .contact-container { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 50px; 
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .contact-info h3 { 
+      font-size: 1.8rem; 
+      margin-bottom: 20px; 
+      color: var(--primary);
+    }
+    
+    .contact-detail { 
+      display: flex; 
+      align-items: flex-start; 
+      margin-bottom: 25px; 
+    }
+    
+    .contact-icon { 
+      font-size: 1.5rem; 
+      color: var(--primary); 
+      margin-right: 15px; 
+      min-width: 30px; 
+    }
+    
+    .contact-text h4 { 
+      margin-bottom: 5px; 
+      color: var(--dark);
+    }
+    
+    .social-links { 
+      display: flex; 
+      margin-top: 30px; 
+    }
+    
     .social-links a {
-      display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; margin-right: 15px; text-decoration: none; transition: var(--transition);
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      width: 45px; 
+      height: 45px; 
+      background: var(--primary); 
+      color: white; 
+      border-radius: 50%; 
+      margin-right: 15px; 
+      text-decoration: none; 
+      transition: var(--transition);
     }
-    .social-links a:hover { transform: translateY(-5px) rotate(5deg); background: var(--secondary); }
-    .contact-form .form-group { margin-bottom: 20px; }
-    .contact-form input, .contact-form textarea {
-      width: 100%; padding: 15px; border: 1px solid #d1d5db; border-radius: 10px; font-family: inherit; font-size: 1rem; transition: var(--transition);
+    
+    .social-links a:hover { 
+      transform: translateY(-5px) rotate(5deg); 
+      background: var(--secondary); 
+      color: var(--dark);
     }
-    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2); }
-    .contact-form textarea { height: 150px; resize: vertical; }
 
-    footer { background: var(--darker); color: white; text-align: center; padding: 40px 0; }
+    /* New Contact Form Styling */
+    #contact-form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    #contact-form input,
+    #contact-form textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border 0.3s ease;
+    }
 
-    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+    #contact-form input:focus,
+    #contact-form textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 6px rgba(109, 40, 217, 0.2);
+    }
+
+    #contact-form textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+      transform: translateY(-2px);
+    }
+
+    #status {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #333;
+      text-align: center;
+    }
 
     /* UPDATED: Larger education logos */
     .institute-logo {
@@ -183,7 +275,6 @@
       overflow: hidden; position: relative; flex-shrink: 0;
     }
     .institute-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .institute-logo input[type="file"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; }
 
     /* UPDATED: Larger specialization/award thumbnails */
     .thumb {
@@ -191,7 +282,6 @@
       font-size: 1.1rem; color: var(--primary-dark); box-shadow: 0 3px 8px rgba(0,0,0,0.08); overflow: hidden; cursor: default; position: relative; flex-shrink: 0;
     }
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .thumb input[type="file"] { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0;}
 
     #portfolio { background: white; padding-bottom: 120px; }
     .portfolio-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -206,6 +296,13 @@
     .portfolio-card p { color: var(--gray); flex-grow: 1; margin-bottom: 15px; }
     .portfolio-card a { color: var(--secondary); font-weight: 600; text-decoration: none; transition: var(--transition); align-self: flex-start; }
     .portfolio-card a:hover { text-decoration: underline; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+    .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 992px) {
       .hero-content { flex-direction: column; text-align: center; }
@@ -307,7 +404,6 @@
               <div style="margin-bottom: 30px;">
                 <div style="display: flex; align-items: center; margin-bottom: 8px;">
                   <div class="institute-logo" title="University of Toronto">
-                    
                     <img id="edu-logo-1" src="assets/UofT1.png" alt="University of Toronto Logo" />
                   </div>
                   <strong>Postdoctoral Research Fellowship</strong>
@@ -321,7 +417,6 @@
               <div style="margin-bottom: 30px;">
                 <div style="display: flex; align-items: center; margin-bottom: 8px;">
                   <div class="institute-logo" title="Université de Lyon">
-                    
                     <img id="edu-logo-2" src="assets/UofLyon.png" alt="Université de Lyon Logo" />
                   </div>
                   <strong>Ph.D. in Biomedical Engineering</strong>
@@ -335,7 +430,6 @@
               <div>
                 <div style="display: flex; align-items: center; margin-bottom: 8px;">
                   <div class="institute-logo" title="Hariri Canadian University">
-                    
                     <img id="edu-logo-3" src="assets/RHU.png" alt="Hariri Canadian Univeristy Logo" />
                   </div>
                   <strong>Bachelor's & Master's in Biomedical Engineering</strong>
@@ -359,21 +453,18 @@
                 </li>
                 <li style="margin-bottom: 12px; display: flex; align-items: center;">
                   <div class="thumb" title="Stanford University">
-                    
                     <img id="spec-logo-2" src="assets/Stanford.png" alt="Stanford Logo" />
                   </div>
                   <span>Stanford University (2024) — Artificial Intelligence in Healthcare</span>
                 </li>
                 <li style="margin-bottom: 12px; display: flex; align-items: center;">
                   <div class="thumb" title="Amazon Web Services">
-                    
                     <img id="spec-logo-3" src="assets/aws.png" alt="AWS Logo" />
                   </div>
                   <span>Amazon Web Services (2023) — Machine Learning Engineer</span>
                 </li>
                 <li style="margin-bottom: 12px; display: flex; align-items: center;">
                   <div class="thumb" title="DeepLearning.AI">
-                    
                     <img id="spec-logo-4" src="assets/deeplearningai.png" alt="DeepLearning.AI Logo" />
                   </div>
                   <span>DeepLearning.AI (2021–2022) — TensorFlow Developer, Deep Learning, MLOps</span>
@@ -384,42 +475,36 @@
               <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 10px; display: flex; align-items: center;">
                   <div class="thumb">
-                    
                     <img id="award-logo-1" src="assets/UofT1.png" alt="Award Logo" />
                   </div>
                   <span>Best Research Presentation Award (University of Toronto, 2024)</span>
                 </li>
                 <li style="margin-bottom: 10px; display: flex; align-items: center;">
                   <div class="thumb">
-                    
                     <img id="award-logo-2" src="assets/aws.png" alt="Award Logo" />
                   </div>
                   <span>AWS Machine Learning Engineer Scholarship (AWS, 2022)</span>
                 </li>
                 <li style="margin-bottom: 10px; display: flex; align-items: center;">
                   <div class="thumb">
-                    
                     <img id="award-logo-3" src="assets/RHU.png" alt="Award Logo" />
                   </div>
                   <span>Graduate Research Award, Rafik Hariri University (2013)</span>
                 </li>
                 <li style="margin-bottom: 10px; display: flex; align-items: center;">
                   <div class="thumb">
-                    
                     <img id="award-logo-4" src="assets/sjtu.png" alt="Award Logo" />
                   </div>
                   <span>Full Travel & Accommodation Grant, IEEE 1st International Summer School on Neural Engineering, Jiao Tong University, Shanghai, China (2013)</span>
                 </li>
                 <li style="margin-bottom: 10px; display: flex; align-items: center;">
                   <div class="thumb">
-                    
                     <img id="award-logo-5" src="assets/pavia.png" alt="Award Logo" />
                   </div>
                   <span>Full Travel & Accommodation Grant, 9th IEEE-EMBS International Summer School on Biomedical Signal Processing, Borromeo College, Pavia, Italy (Aug 30 – Sep 6, 2015)</span>
                 </li>
                 <li style="display: flex; align-items: center;">
                   <div class="thumb">
-                    
                     <img id="award-logo-6" src="assets/kafalat.png" alt="Award Logo" />
                   </div>
                   <span>Startup Innovation Grant by Kafalat (Beirut, Lebanon) — Wrist-worn non-invasive glucometer</span>
@@ -722,7 +807,7 @@
     <div class="container">
       <div class="section-title animate-on-scroll">
         <h2>Contact Me</h2>
-        <p>Let's collaborate to advance healthcare through innovation</p>
+        <p>Let's connect for research, consulting, or teaching opportunities</p>
       </div>
       <div class="contact-container">
         <div class="contact-info animate-on-scroll">
@@ -767,12 +852,21 @@
         </div>
 
         <div class="contact-form animate-on-scroll">
-          <form id="contactForm">
-            <div class="form-group"><input type="text" placeholder="Your Name" required /></div>
-            <div class="form-group"><input type="email" placeholder="Your Email" required /></div>
-            <div class="form-group"><input type="text" placeholder="Subject" /></div>
-            <div class="form-group"><textarea placeholder="Your Message" required></textarea></div>
-            <button type="submit" class="btn">Send Message</button>
+          <form id="contact-form" method="POST" action="https://formspree.io/f/xnnbkjpg">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subject" name="subject" placeholder="Subject">
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+            <p id="status"></p>
           </form>
         </div>
       </div>
@@ -804,12 +898,27 @@
       });
     });
 
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function (e) {
+    // Updated Contact Form Handler with Formspree Integration
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        alert('Thank you for your message! I will get back to you soon.');
-        contactForm.reset();
+        const data = new FormData(form);
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          status.innerHTML = "✅ Thanks! I'll get back to you ASAP.";
+          status.style.color = "green";
+          form.reset();
+        } else {
+          status.innerHTML = "❌ Oops! Something went wrong. Please try again.";
+          status.style.color = "red";
+        }
       });
     }
 
@@ -827,28 +936,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
